@@ -1,5 +1,5 @@
 #######################################################################################################
-## currency.tcl 1.0  (25/03/2020)  			  Copyright 2008 - 2020 @ WwW.TCLScripts.NET ##
+## currency.tcl 1.1  (21/11/2020)  			 									Copyright 2008 - 2020 @ WwW.TCLScripts.NET ##
 ##                        _   _   _   _   _   _   _   _   _   _   _   _   _   _                      ##
 ##                       / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \                     ##
 ##                      ( T | C | L | S | C | R | I | P | T | S | . | N | E | T )                    ##
@@ -10,13 +10,13 @@
 ##                                              PRESENTS                                             ##
 ##									                           ® ##
 ############################################  Currency TCL   ##########################################
-##									                             ##
-##  DESCRIPTION: 							                             ##
-##  An utility to convert currencies. A list of currencies is available in tcl.		             ##
-##  												     ##
-##			                            						     ##
+##									                             																										 ##
+##  DESCRIPTION: 							                             																					 ##
+##  An utility to convert currencies.	Over 140 currencies available																	 ##
+##  												     																																		 ##
+##			                            						     																								 ##
 ##  Tested on Eggdrop v1.8.4 (Debian Linux 3.16.0-4-amd64) Tcl version: 8.6.10                       ##
-##									                             ##
+##									                             																										 ##
 #######################################################################################################
 ##									                             ##
 ##                                 /===============================\                                 ##
@@ -24,50 +24,50 @@
 ##                                 \===============================/                                 ##
 ##									                             ##
 #######################################################################################################
-##									                             ##
-##  INSTALLATION: 							                             ##
-##     ++ http package is REQUIRED for this script to work.                           		     ##
-##     ++ json package is REQUIRED for this script to work.		                             ##
+##									                             																										 ##
+##  INSTALLATION: 							                             																				 ##
+##     ++ http package is REQUIRED for this script to work.                           		     			 ##
+##     ++ json package is REQUIRED for this script to work.		                             					 ##
 ##     ++ Edit the currency.tcl script and place it into your /scripts directory,                    ##
 ##     ++ add "source scripts/currency.tcl" to your eggdrop config and rehash the bot.               ##
-##									                             ##
+##									                             																										 ##
 #######################################################################################################
 #######################################################################################################
-##									                             ##
+##									                             																									   ##
 ##  OFFICIAL LINKS:                                                                                  ##
 ##   E-mail      : BLaCkShaDoW[at]tclscripts.net                                                     ##
 ##   Bugs report : http://www.tclscripts.net                                                         ##
-##   GitHub page : https://github.com/tclscripts/ 			                             ##
+##   GitHub page : https://github.com/tclscripts/ 			                             								 ##
 ##   Online help : irc://irc.undernet.org/tcl-help                                                   ##
 ##                 #TCL-HELP / UnderNet        	                                                     ##
 ##                 You can ask in english or romanian                                                ##
-##									                             ##
+##									                              																									 ##
 ##     paypal.me/DanielVoipan = Please consider a donation. Thanks!                                  ##
-##									                             ##
+##									                             																										 ##
 #######################################################################################################
-##									                             ##
+##									                             																										 ##
 ##                           You want a customised TCL Script for your eggdrop?                      ##
 ##                                Easy-peasy, just tell me what you need!                            ##
 ##                I can create almost anything in TCL based on your ideas and donations.             ##
 ##                  Email blackshadow@tclscripts.net or info@tclscripts.net with your                ##
 ##                    request informations and I'll contact you as soon as possible.                 ##
-##									                             ##
+##									                             																										 ##
 #######################################################################################################
-##												     ##
-##  Commmands:									                     ##
-##	!conv <currency> ; it will convert the <currency> in the default currency set 		     ##			
-##	!conv <currency> [value] ; it will convert the value specified of <currency> to the default  ##
-##	!conv <from_currency> <to_currency> ; it will convert <from_currency> to to_currency         ##
-##	!conv <from_currency> <to_currency> [value] ;it will convert <from_currency> to <to_currency>##
+##												     																																			 ##
+##  Commmands:									                     																								 ##
+##	!conv <currency> ; it will convert the <currency> in the default currency set 		           		 ##
+##	!conv <currency> [value] ; it will convert the value specified of <currency> to the default      ##
+##	!conv <from_currency> <to_currency> ; it will convert <from_currency> to to_currency         		 ##
+##	!conv <from_currency> <to_currency> [value] ;it will convert <from_currency> to <to_currency>		 ##
 ##                                                                                                   ##
-##  Settings: .chanset/.set #chan +currency - enable the !cur command	                             ##
-##            							                                     ##
+##  Settings: .chanset/.set #chan +currency - enable the !cur command	                               ##
+##            							                                     																		 ##
 ##                                                                                                   ##
 ##            .chanset/.set #chan default-currency <currency - setup the default currency            ##
-##												     ##
+##												     																																			 ##
 #######################################################################################################
 #######################################################################################################
-##									                             ##
+##									                             																										 ##
 ##  LICENSE:                                                                                         ##
 ##   This code comes with ABSOLUTELY NO WARRANTY.                                                    ##
 ##                                                                                                   ##
@@ -81,7 +81,7 @@
 ##   See the GNU General Public License for more details.                                            ##
 ##        (http://www.gnu.org/copyleft/library.txt)                                                  ##
 ##                                                                                                   ##
-##  			          Copyright 2008 - 2020 @ WwW.TCLScripts.NET                         ##
+##  			          Copyright 2008 - 2020 @ WwW.TCLScripts.NET                         							 ##
 ##                                                                                                   ##
 #######################################################################################################
 #######################################################################################################
@@ -110,48 +110,9 @@ set currency(flood_prot) "3:10"
 ###
 set currency(ignore_prot) "1"
 
-
-#The list with currencies available
-##
-set currency(valid_currencys) {
-"CAD"
-"HKD"
-"ISK"
-"PHP"
-"DKK"
-"HUF"
-"CZK"
-"GBP"
-"RON"
-"SEK"
-"IDR"
-"INR"
-"BRL"
-"RUB"
-"HRK"
-"JPY"
-"THB"
-"CHF"
-"USD"
-"EUR"
-"MYR"
-"BGN"
-"TRY"
-"CNY"
-"NOK"
-"NZD"
-"ZAR"
-"MXN"
-"SGD"
-"AUD"
-"ILS"
-"KRW"
-"PLN"
-}
-
 ########################################################################################################
 #
-#					The ENd :-)
+#																							The ENd :-)
 #
 #######################################################################################################
 
@@ -162,18 +123,6 @@ setudef flag currency
 
 package require http
 package require json
-
-###
-proc currency:valid_currency {curr} {
-	global currency
-	
-if {$curr == ""} { return 0 }
-if {[lsearch -nocase $currency(valid_currencys) $curr] > -1} {
-	return 1
-} else {
-	return 0
-	}
-}
 
 ###
 proc currency:cmd {nick host hand chan arg} {
@@ -187,39 +136,29 @@ if {$flood_protect == "1"} {
 	putserv "NOTICE $nick :Flood protection enabled. Please wait $get_seconds seconds."
 	return
 }
-	set from [string toupper [lindex [split $arg] 1]]
-	set to [string toupper [lindex [split $arg] 0]]
+	set from [string tolower [lindex [split $arg] 1]]
+	set to [string tolower [lindex [split $arg] 0]]
 	set value [lindex [split $arg] 2]
 	set output ""
-	set valid_to [currency:valid_currency $to]
-	set valid_from [currency:valid_currency $from]
-if {$valid_to == "0"} { puthelp "NOTICE $nick :Invalid <from> currency, please read the currency list." ; return }
-if {$valid_from == "0" && ![regexp {^[0-9]} $from]} {
-	set currency_set [channel get $chan default-currency]
-if {$currency_set == ""} {
-	set from [string toupper $currency(default_currency)]
-	} else {
-	set from [string toupper $currency_set]
-	}
-} elseif {[regexp {^[0-9]} $from]} {
+if {[regexp {^[0-9]} $from]} {
 	set value $from
 	set currency_set [channel get $chan default-currency]
 if {$currency_set == ""} {
-	set from [string toupper $currency(default_currency)]
+	set from [string tolower $currency(default_currency)]
 	} else {
-	set from [string toupper $currency_set]
+	set from [string tolower $currency_set]
 	}
-} elseif {$valid_from == "0"} {
+} elseif {$from == ""} {
 	set currency_set [channel get $chan default-currency]
 if {$currency_set == ""} {
-	set from [string toupper $currency(default_currency)]
+	set from [string tolower $currency(default_currency)]
 	} else {
-	set from [string toupper $currency_set]
+	set from [string tolower $currency_set]
 	}
 }
 if {$value != ""} {
 if {![regexp {^[0-9]} $value]} {
-	puthelp "NOTICE $nick :Invalid <value> specified, please use a number."	
+	puthelp "NOTICE $nick :Invalid <value> specified, please use a number."
 	return
 	}
 } else { set value 1 }
@@ -231,14 +170,16 @@ if {$data == "-1"} {
 	puthelp "NOTICE $nick :Data not available. Try again later."
 	return
 }
-	set rates [currency:getjson "rates" $data]
-	set split_values [split $rates " "]
-	set find [lsearch -nocase $split_values "$from"]
-	set value_for_one [lindex $split_values [expr $find + 1]]
+	set rates [currency:getjson $from $data]
+if {$rates == ""} {
+putserv "NOTICE $nick :Invalid <from> or <to> currency specified."
+	return
+}
+	set value_for_one [expr double(round(10000*[lindex $rates 9]))/10000]
 	set output [expr $value_for_one * $value]
 	set calc [expr double(round(10000*$output))/10000]
-	set date [currency:getjson "date" $data]
-	putserv "PRIVMSG $chan :-= CONVERT =- From: \002$to\002 ; Value: \002$calc\002 \002$from\002 (1 $to = $value_for_one $from) ; Currency Date: $date"
+	set date [lindex $rates 11]
+	putserv "PRIVMSG $chan :-= CONVERT =- From: \002[string toupper $to]\002 ; Value: \002$calc\002 \002[string toupper $from]\002 (1 $to = $value_for_one [string toupper $from]) ; Currency Date: $date"
 }
 
 ###
@@ -262,20 +203,19 @@ proc commify {num {sep .}} {
 set currency(name) "Currency TCL"
 set currency(owner) "BLaCkShaDoW"
 set currency(site) "WwW.TclScripts.Net"
-set currency(version) "1.0"
+set currency(version) "1.1"
 
 
 ###
 proc currency:data {base} {
 	global currency
-	set link "http://blackexchange.000webhostapp.com/?base=$base"
-	#http::register https 443 [list ::tls::socket -tls1 1]
+	set link "http://www.floatrates.com/daily/$base.json"
 	set ipq [http::config -useragent "lynx"]
-	set ipq [::http::geturl "$link" -timeout 10000]
+	set ipq [::http::geturl "$link" -timeout 20000]
 	set status [::http::status $ipq]
-if {$status != "ok"} { 
+if {$status != "ok"} {
 	::http::cleanup $ipq
-	return -1 
+	return -1
 }
 	set data [http::data $ipq]
 	::http::cleanup $ipq
@@ -311,11 +251,11 @@ if {[string match "*currency:remove:flood $host $chan*" [join [lindex $tmr 1]]]}
 	killutimer [lindex $tmr 2]
 	}
 }
-if {![info exists currency(flood:$host:$chan)]} { 
-	set currency(flood:$host:$chan) 0 
+if {![info exists currency(flood:$host:$chan)]} {
+	set currency(flood:$host:$chan) 0
 }
 	incr currency(flood:$host:$chan)
-	utimer $timer [list currency:remove:flood $host $chan]	
+	utimer $timer [list currency:remove:flood $host $chan]
 if {$currency(flood:$host:$chan) > $number} {
 	set currency(flood:$host:$chan:act) 1
 	utimer 60 [list currency:expire:flood $host $chan]
@@ -353,4 +293,3 @@ if {[string match "*currency:expire:flood $host $chan*" [join [lindex $tmr 1]]]}
 
 
 putlog "$currency(name) $currency(version) TCL by $currency(owner) loaded. For more tcls visit -- $currency(site) --"
-
